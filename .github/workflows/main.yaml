@@ -83,7 +83,8 @@ jobs:
 
       - name: Snyk DAST Scan 
         run: | 
-            snyk dast test \ --target-url="https://staging.my-java-app.example.com" \ 
-            --severity-threshold=high      
+            snyk dast scan \ 
+            --target-url="https://staging.my-java-app.example.com" \ 
+            --severity-threshold=high   
         env: 
           SNYK_TOKEN: ${{ env.SNYK_TOKEN }}
