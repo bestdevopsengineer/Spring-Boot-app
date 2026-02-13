@@ -20,6 +20,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Make mvnw executable
+        run: chmod +x mvnw
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
@@ -42,6 +45,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Make mvnw executable
+        run: chmod +x mvnw
 
       - name: Install Snyk CLI
         uses: snyk/actions/setup@v1
