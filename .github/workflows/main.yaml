@@ -98,7 +98,7 @@ jobs:
           EOF
 
       - name: Test EC2 connectivity
-        run: curl -v http://${{ secrets.EC2_HOST }}:8080
+        run: curl -v http://ec2-34-234-83-89.compute-1.amazonaws.com:8080
 
   dast:
     runs-on: ubuntu-latest
