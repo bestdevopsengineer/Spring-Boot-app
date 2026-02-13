@@ -42,6 +42,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        
+      - name: Make mvnw executable 
+        run: chmod +x mvnw
 
       - name: Install Snyk CLI
         uses: snyk/actions/setup@v1
@@ -50,7 +53,9 @@ jobs:
       # SCA — Dependency Scan
       # -------------------------
       - name: Snyk SCA (Dependencies)
-        run: snyk test --severity-threshold=high
+        run: |
+          ./mvnw dependency:tree -DoutputType=dot --batch-mode
+          snyk test --severity-threshold=high
         env:
           SNYK_TOKEN: ${{ env.SNYK_TOKEN }}
 
