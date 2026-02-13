@@ -1,5 +1,4 @@
 name: java-ci-security
-
 on:
   push:
     branches: [ main ]
