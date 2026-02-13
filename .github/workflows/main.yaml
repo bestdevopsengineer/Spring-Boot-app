@@ -78,13 +78,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         
-      - name: Install Snyk CLI 
-        uses: snyk/actions/setup@v1
+      - name: Pull OWASP ZAP 
+        run: docker pull ghcr.io/zaproxy/zaproxy:stable
 
-      - name: Snyk DAST Scan 
+      - name: OWASP ZAP Baseline Scan 
         run: | 
-            snyk dast scan \ 
-            --target-url="https://staging.my-java-app.example.com" \ 
-            --severity-threshold=high   
-        env: 
-          SNYK_TOKEN: ${{ env.SNYK_TOKEN }}
+           docker run --rm \ 
+           -v $(pwd):/zap/wrk \ 
+           ghcr.io/zaproxy/zaproxy:stable zap-baseline.py \ 
+           -t https://staging.my-java-app.example.com \ 
+           -r zap-report.html \ 
+           -x zap-report.xml \ 
+           -I
+
+      - name: Upload ZAP Report 
+        uses: actions/upload-artifact@v4 
+        with: 
+          name: zap-report 
+          path: zap-report.html
+  
