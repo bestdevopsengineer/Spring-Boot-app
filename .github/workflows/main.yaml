@@ -34,6 +34,9 @@ jobs:
         with:
           name: java-app
           path: target/*.jar
+          
+      - name: list
+        run: ls -la
 
   security-scans:
     runs-on: ubuntu-latest
