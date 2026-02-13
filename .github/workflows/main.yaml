@@ -83,7 +83,7 @@ jobs:
 
       - name: OWASP ZAP Baseline Scan 
         run: | 
-           docker run --rm -v $(pwd):/zap/wrk ghcr.io/zaproxy/zaproxy:stable \
+           docker run --rm --user root -v $(pwd):/zap/wrk ghcr.io/zaproxy/zaproxy:stable \
            zap-baseline.py \
            -t https://staging.my-java-app.example.com \
            -r zap-report.html \
