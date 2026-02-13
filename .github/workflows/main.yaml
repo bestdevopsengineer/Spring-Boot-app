@@ -27,7 +27,7 @@ jobs:
           java-version: '17'
 
       - name: Build & Unit Test
-        run: mvn -B clean verify
+        run: ./mvnw -B clean verify
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -50,7 +50,9 @@ jobs:
       # SCA — Dependency Scan
       # -------------------------
       - name: Snyk SCA (Dependencies)
-        run: snyk test --severity-threshold=high
+        run: |
+          ./mvnw dependency:tree -DoutputType=dot --batch-mode
+          snyk test --severity-threshold=high
         env:
           SNYK_TOKEN: ${{ env.SNYK_TOKEN }}
 
