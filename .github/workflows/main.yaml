@@ -85,7 +85,7 @@ jobs:
         run: | 
            docker run --rm --user root -v $(pwd):/zap/wrk ghcr.io/zaproxy/zaproxy:stable \
            zap-baseline.py \
-           -t https://staging.my-java-app.example.com \
+           -t ec2-34-234-83-89.compute-1.amazonaws.com \
            -r zap-report.html \
            -x zap-report.xml \
            -I
