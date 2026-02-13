@@ -94,7 +94,7 @@ jobs:
           
       - name: Copy JAR to EC2 
         run: | 
-          scp -o StrictHostKeyChecking=no -i ~/.ssh/ec2_key target/*.jar ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ec2-user/app.jar
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/ec2_key ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}
 
       - name: Restart Java app on EC2 
         run: | 
